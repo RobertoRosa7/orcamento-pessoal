@@ -36,3 +36,6 @@ function cadastrarDespesas(){
 	//Debug
 	console.log(despesa);
 }
+function gravar(){
+	
+}
