@@ -12,7 +12,44 @@ class Despesas{
 		this.valor = valor;
 	}
 }
+class Db{
+	/*
+	* Verificação do id, se já existe
+	*/
+	constructor(){
+		//colhendo valor do id no local storage
+		let id = localStorage.getItem('id');
 
+		//verificando e passando valor 0 para null
+		if(id === null){
+			localStorage.setItem('id', 0);
+		}
+	}
+	/*
+	* Função get ID: para não sobreescrever os índice quando for inserído novos valores no formulários
+	*/
+	getProximoID(){
+		let getProximoID = localStorage.getItem('id');
+		//adicionando id 
+		return parseInt(getProximoID) + 1;
+	}
+	/* Função gravar dados no local storage
+	* param: recebe um objeto literal que terá que ser transformado em JSON
+	*/
+	gravar(d){
+		/*
+		* Acessando o objeto de local storage, com a função setItem que um dos recursos de local storage podemos
+		* adicionar os parâmetros, que são dois obrigatórios para o setItem.
+		* JSON.stringfy() assim poderá converter um objeto literal para formato JSON
+		*/
+		let id = this.getProximoID();
+		localStorage.setItem(id, JSON.stringify(d));
+
+		//Atualizando o valor do id
+		localStorage.setItem('id', id);
+	}
+}
+let db = new Db();
 function cadastrarDespesas(){
 	/* Há duas forma de recuperar os valores do elementos HTML
 	* primeiro deve armazenar esses valores em uma variável, para ser reutilizada depois, em seguida deve colocar
@@ -35,17 +72,5 @@ function cadastrarDespesas(){
 
 	//Debug
 	//console.log(despesa);
-	gravar(despesa);
-}
-/*
-* Função gravar dados no local storage
-* param: recebe um objeto literal que terá que ser transformado em JSON
-*/
-function gravar(d){
-	/*
-	* Acessando o objeto de local storage, com a função setItem que um dos recursos de local storage podemos
-	* adicionar os parâmetros, que são dois obrigatórios para o setItem.
-	* JSON.stringfy() assim poderá converter um objeto literal para formato JSON
-	*/
-	localStorage.setItem('despesa', JSON.stringify(d));
+	db.gravar(despesa);
 }
