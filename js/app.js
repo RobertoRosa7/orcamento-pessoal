@@ -34,8 +34,18 @@ function cadastrarDespesas(){
 	let despesa = new Despesas(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
 
 	//Debug
-	console.log(despesa);
+	//console.log(despesa);
+	gravar(despesa);
 }
-function gravar(){
-	
+/*
+* Função gravar dados no local storage
+* param: recebe um objeto literal que terá que ser transformado em JSON
+*/
+function gravar(d){
+	/*
+	* Acessando o objeto de local storage, com a função setItem que um dos recursos de local storage podemos
+	* adicionar os parâmetros, que são dois obrigatórios para o setItem.
+	* JSON.stringfy() assim poderá converter um objeto literal para formato JSON
+	*/
+	localStorage.setItem('despesa', JSON.stringify(d));
 }
