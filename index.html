@@ -113,49 +113,23 @@
         </div>
       </div>
     </section>
-    
-    <section id="modalErro">
-      <!--Modal-->
-      <div class="modal fade" id="erroGravar" tabindex="-1" role="dialog" aria-labelledby="exemploModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-danger" id="exemploModal">Erro: Verifique os dados inseridos</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text-justify">
-                Verifique os campos abaixo e certifique de que estão todos preenchidos!
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-danger" data-dismiss="modal" type="button">Volte e verifique</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-     <section id="modalSuccess">
+     <section id="modalRegistrarDespesa">
       <!--Modal-->
-      <div class="modal fade" id="successGravar" tabindex="-1" role="dialog" aria-labelledby="exemploModal" aria-hidden="true">
+      <div class="modal fade" id="modalRegistrarDespesas" tabindex="-1" role="dialog" aria-labelledby="titleModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-success" id="exemploModal">Registro inserido com sucesso!</h5>
+              <h5 class="modal-title" id="titleModal"></h5>
               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p class="text-center">
-                Despesas cadastrada com sucesso!
-              </p>
+              <p class="" id="paragrafoSucesso"></p>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-success" data-dismiss="modal" type="button">voltar</button>
+              <button id="botaoModal" data-dismiss="modal" type="button"></button>
             </div>
           </div>
         </div>

@@ -88,12 +88,13 @@ class Despesas{
 					clearInterval(x);
 				}
 			},2000)
+		}	
 		for(let i in this){
 			if(this[i] == undefined || this[i] == '' || this[i] == null){
 				return false;
-				}
 			}
 	 	}
+
 		return true;
 	}
 }
@@ -158,11 +159,21 @@ function cadastrarDespesas(){
 	if(despesa.validarDados()){
 		//Debug
 		//console.log(despesa);
-		db.gravar(despesa);
-		$('#successGravar').modal('show');
+		//db.gravar(despesa);
+		$('#modalRegistrarDespesas').modal('show');
+		document.getElementById('titleModal').className = 'text-success';
+		document.getElementById('titleModal').innerHTML = 'Registro inserido com sucesso!';
+		document.getElementById('paragrafoSucesso').innerHTML = 'Despesas cadastrado com sucesso!';
+		document.getElementById('botaoModal').className = 'btn btn-success';
+		document.getElementById('botaoModal').innerHTML = 'Voltar';
 	}else{
 		//dialog de erro
-		$('#erroGravar').modal('show');
+		$('#modalRegistrarDespesas').modal('show');
+		document.getElementById('titleModal').className = 'text-danger';
+		document.getElementById('titleModal').innerHTML = 'Erro: Verifique os campos abaixo!';
+		document.getElementById('paragrafoSucesso').innerHTML = 'Não foi possível cadastrar sua despesa!';
+		document.getElementById('botaoModal').className = 'btn btn-danger';
+		document.getElementById('botaoModal').innerHTML = 'Voltar e Verificar';
 	}
 }
 function extrairString(){
