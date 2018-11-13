@@ -1,0 +1,41 @@
+/*
+* Estilização da aplicação orçamento pessoal
+* Autor: Roberto Rosa
+* 
+* Projeto: Realizado através da Udemy
+*/
+ h1{
+   font-family: 'Circular Std Black';
+   color:silver;
+ }
+ .form-control:focus{
+    box-shadow: none;
+    border:1px solid #989898;
+    background-color:#eee;
+ }
+  .btn:focus{
+    box-shadow:none;
+ }
+[data-notify]{
+	opacity: .6;
+	transition: .3s;
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+}
+[data-notify].animate{
+	position:relative;
+	bottom:8px;
+	left:0;
+	opacity: 1;
+	color:red;
+	transition: .3s
+}
+[data-notify]#notify-mes,
+[data-notify]#notify-dia,
+[data-notify]#notify-tipo{
+}
+[data-notify]#notify-tipo{
+}
+[data-notify]#notify-valor{
+}
