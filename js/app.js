@@ -158,8 +158,8 @@ function cadastrarDespesas(){
 	if(despesa.validarDados()){
 		//Debug
 		//console.log(despesa);
-		//db.gravar(despesa);
-		console.log('Dados válidos');
+		db.gravar(despesa);
+		$('#successGravar').modal('show');
 	}else{
 		//dialog de erro
 		$('#erroGravar').modal('show');
