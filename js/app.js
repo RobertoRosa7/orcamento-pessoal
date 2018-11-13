@@ -17,7 +17,7 @@ class Despesas{
 		* a este objeto será percorrido os seus valores.
 		*/
 		if(this.ano == undefined || this.ano == '' || this.ano == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-ano').className = 'animate';
 				document.getElementById('ano').className = 'border-danger form-control';
@@ -27,9 +27,9 @@ class Despesas{
 					document.getElementById('ano').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		}else if(this.mes == undefined || this.mes == '' || this.mes == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-mes').className = 'animate';
 				document.getElementById('mes').className = 'border-danger form-control';
@@ -39,9 +39,9 @@ class Despesas{
 					document.getElementById('mes').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		}else if(this.dia == undefined || this.dia == '' || this.dia == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-dia').className = 'animate';
 				document.getElementById('dia').className = 'border-danger form-control';
@@ -51,9 +51,9 @@ class Despesas{
 					document.getElementById('dia').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		}else if(this.tipo == undefined || this.tipo == '' || this.tipo == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-tipo').className = 'animate';
 				document.getElementById('tipo').className = 'border-danger form-control';
@@ -63,9 +63,9 @@ class Despesas{
 					document.getElementById('tipo').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		}else if(this.descricao == undefined || this.descricao == '' || this.descricao == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-descricao').className = 'animate';
 				document.getElementById('descricao').className = 'border-danger form-control';
@@ -75,9 +75,9 @@ class Despesas{
 					document.getElementById('descricao').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		}else if(this.valor == undefined || this.valor == '' || this.valor == null){
-			var i = 7;
+			var i = 3;
 			var x = setInterval(function(){
 				document.getElementById('notify-valor').className = 'animate';
 				document.getElementById('valor').className = 'border-danger form-control';
@@ -87,7 +87,7 @@ class Despesas{
 					document.getElementById('valor').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
-			},1000)
+			},2000)
 		for(let i in this){
 			if(this[i] == undefined || this[i] == '' || this[i] == null){
 				return false;
