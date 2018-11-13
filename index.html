@@ -79,7 +79,7 @@
 
           <div class="col-sm-4 col-md-2">
             <span id="notify-dia" data-notify="invalid" for="dia">Escolha um Dia</span>
-            <input type="text" id="dia" placeholder="dia" class="form-control">
+            <input onkeyup="extrairString()" onblur="changeBlur()" onfocus="changeFocus()"type="text" id="dia" placeholder="dia" class="form-control">
           </div>
 
           <div class="col-md-6">
@@ -99,16 +99,40 @@
         <div class="row">
           <div class="col-md-8">
            <span id="notify-descricao" data-notify="invalid" for="descricao">Descrição</span>
-            <input type="text" class="form-control" id="descricao" placeholder="descrição">
+            <input onkeyup="extrairString()" onblur="changeBlur()" onfocus="changeFocus()" type="text" class="form-control" id="descricao" placeholder="descrição">
           </div>
 
           <div class="col-md-3 col-4">
            <span id="notify-valor" data-notify="invalid" for="valor">Escolha um Valor</span>
-            <input type="text" class="form-control" id="valor" placeholder="valor">
+            <input onkeyup="extrairString()" onblur="changeBlur()" onfocus="changeFocus()" type="text" class="form-control" id="valor" placeholder="valor">
           </div>
 
           <div class="col-md-1 col-2 d-flex justify-content-end">
             <button onclick="cadastrarDespesas()" class="btn btn-primary align-self-end" type="button"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="meuModal">
+      <!--Modal-->
+      <div class="modal fade" id="erroGravar" tabindex="-1" role="dialog" aria-labelledby="exemploModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger" id="exemploModal">Erro: Verifique os dados inseridos</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="text-justify">
+                Verifique os campos abaixo e certifique de que estão todos preenchidos!
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" data-dismiss="modal" type="button">Volte e verifique</button>
+            </div>
           </div>
         </div>
       </div>

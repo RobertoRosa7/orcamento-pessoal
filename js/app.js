@@ -2,9 +2,6 @@
 * Criando a classe de despesa para o Objeto
 * Recuperando os dados do formulário para inserção no atributos do objeto
 */
-
-const animateClass = 'animate';
-
 class Despesas{
 	constructor(ano,mes,dia,tipo,descricao,valor){
 		this.ano = ano;
@@ -19,69 +16,84 @@ class Despesas{
 		* para percorrer os valores dos atruibuto da classe, deve usar this[i], assim o this que faz referência
 		* a este objeto será percorrido os seus valores.
 		*/
-		
-		if(this.ano < 2018){
-			var i = 5;
+		if(this.ano == undefined || this.ano == '' || this.ano == null){
+			var i = 7;
 			var x = setInterval(function(){
-				document.getElementById('notify-ano').className = animateClass;
+				document.getElementById('notify-ano').className = 'animate';
+				document.getElementById('ano').className = 'border-danger form-control';
 				i--;
 				if(i === 0){
 					document.getElementById('notify-ano').className = 'opacity-0';
+					document.getElementById('ano').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
 			},1000)
-			
 		}else if(this.mes == undefined || this.mes == '' || this.mes == null){
-			var i = 5;
+			var i = 7;
 			var x = setInterval(function(){
-				document.getElementById('notify-mes').className = animateClass;
+				document.getElementById('notify-mes').className = 'animate';
+				document.getElementById('mes').className = 'border-danger form-control';
 				i--;
 				if(i === 0){
 					document.getElementById('notify-mes').className = 'opacity-0';
+					document.getElementById('mes').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
 			},1000)
-
 		}else if(this.dia == undefined || this.dia == '' || this.dia == null){
-			var i = 5;
+			var i = 7;
 			var x = setInterval(function(){
-				document.getElementById('notify-dia').className = animateClass;
+				document.getElementById('notify-dia').className = 'animate';
+				document.getElementById('dia').className = 'border-danger form-control';
 				i--;
 				if(i === 0){
 					document.getElementById('notify-dia').className = 'opacity-0';
+					document.getElementById('dia').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
 			},1000)
 		}else if(this.tipo == undefined || this.tipo == '' || this.tipo == null){
-			var i = 5;
+			var i = 7;
 			var x = setInterval(function(){
-				document.getElementById('notify-tipo').className = animateClass;
+				document.getElementById('notify-tipo').className = 'animate';
+				document.getElementById('tipo').className = 'border-danger form-control';
 				i--;
 				if(i === 0){
 					document.getElementById('notify-tipo').className = 'opacity-0';
+					document.getElementById('tipo').className = 'opacity-0 form-control';
+					clearInterval(x);
+				}
+			},1000)
+		}else if(this.descricao == undefined || this.descricao == '' || this.descricao == null){
+			var i = 7;
+			var x = setInterval(function(){
+				document.getElementById('notify-descricao').className = 'animate';
+				document.getElementById('descricao').className = 'border-danger form-control';
+				i--;
+				if(i === 0){
+					document.getElementById('notify-descricao').className = 'opacity-0';
+					document.getElementById('descricao').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
 			},1000)
 		}else if(this.valor == undefined || this.valor == '' || this.valor == null){
-			var i = 5;
+			var i = 7;
 			var x = setInterval(function(){
-				document.getElementById('notify-valor').className = animateClass;
+				document.getElementById('notify-valor').className = 'animate';
+				document.getElementById('valor').className = 'border-danger form-control';
 				i--;
 				if(i === 0){
 					document.getElementById('notify-valor').className = 'opacity-0';
+					document.getElementById('valor').className = 'opacity-0 form-control';
 					clearInterval(x);
 				}
 			},1000)
-		} else {
-				for(let i in this){
-				//debug
-				//console.log(i, this[i])
-				if(this[i] == undefined || this[i] == '' || this[i] == null){
-					return false;
+		for(let i in this){
+			if(this[i] == undefined || this[i] == '' || this[i] == null){
+				return false;
 				}
 			}
-		}
-		
+	 	}
 		return true;
 	}
 }
@@ -147,9 +159,34 @@ function cadastrarDespesas(){
 		//Debug
 		//console.log(despesa);
 		//db.gravar(despesa);
-		console.log('dados invalidos');
+		console.log('Dados válidos');
 	}else{
 		//dialog de erro
-		console.log('dados validos');
+		$('#erroGravar').modal('show');
 	}
+}
+function extrairString(){
+	let char = document.getElementById('dia').value;
+	let desc = document.getElementById('descricao').value;
+	let valor = document.getElementById('valor').value;
+
+	if(char.length > '2'){
+		document.getElementById('dia').className = 'form-control form-custom-invalid';
+	}else{
+		document.getElementById('dia').className = 'form-control form-custom-valid';
+	}
+
+	if(desc.length < '3'){
+		document.getElementById('descricao').className = 'form-control form-custom-invalid';
+	}else{
+		document.getElementById('descricao').className = 'form-control form-custom-valid';
+	}
+	valor = parseFloat(valor);
+}
+function changeBlur(){
+	document.getElementById('dia').className = 'form-control';
+	document.getElementById('descricao').className = 'form-control';
+}
+function changeFocus(){
+
 }
