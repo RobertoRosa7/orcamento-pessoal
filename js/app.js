@@ -159,7 +159,7 @@ function cadastrarDespesas(){
 	if(despesa.validarDados()){
 		//Debug
 		//console.log(despesa);
-		//db.gravar(despesa);
+		db.gravar(despesa);
 		$('#modalRegistrarDespesas').modal('show');
 		document.getElementById('titleModal').className = 'text-success';
 		document.getElementById('titleModal').innerHTML = 'Registro inserido com sucesso!';
