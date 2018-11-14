@@ -176,8 +176,47 @@ class Db{
 		return despesas;
 	}
 	pesquisar(despesa){
+
+		/*
+		* Trazer o retorno da função recuperarDespesas
+		*/
+		let despesasFiltradas = new Array();
+		despesasFiltradas = this.recuperarTodosRegistros();
+
+		/*
+		* Realizando o filtro, com base na recuperação de dados e fazendo a comparação conforme os dados são
+		* inseridos pelo usuário e seu retorno deve ser true ou false; se for diferente de vazio
+		*/
+		//ano
+		if(despesa.ano != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesa.ano);
+		}
+		//mes
+		if(despesa.mes != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesa.mes);
+		}
+
+		//dia
+		if(despesa.dia != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesa.dia);
+		}
+
+		//tipo
+		if(despesa.tipo != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesa.tipo);
+		}
+
+		//descricao
+		if(despesa.descricao != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesa.descricao);
+		}
+		//valor
+		if(despesa.valor != ''){
+			despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesa.valor);
+		}
+		
 		//Debug
-		console.log(despesa);
+		console.log(despesasFiltradas);
 	}
 }
 let db = new Db();
@@ -315,7 +354,7 @@ function pesquisarDespesas(){
 
 	//objeto passado como parâmetro para a função pesquisar
 	db.pesquisar(despesa);
-	
+
 	//Debug
 	//console.log(despesa);
 }
