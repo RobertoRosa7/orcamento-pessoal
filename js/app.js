@@ -175,6 +175,10 @@ class Db{
 		}
 		return despesas;
 	}
+	pesquisar(despesa){
+		//Debug
+		console.log(despesa);
+	}
 }
 let db = new Db();
 function cadastrarDespesas(){
@@ -199,7 +203,7 @@ function cadastrarDespesas(){
 
 	if(despesa.validarDados()){
 	
-		//db.gravar(despesa);
+		db.gravar(despesa);
 		document.getElementById('titleModal').className = 'text-success';
 		document.getElementById('titleModal').innerHTML = 'Registro inserido com sucesso!';
 		document.getElementById('paragrafoSucesso').innerHTML = 'Despesas cadastrado com sucesso!';
@@ -213,7 +217,7 @@ function cadastrarDespesas(){
 		dia.value = '';
 		tipo.value = '';
 		descricao.value = '';
-		valor.valeu = '';
+		valor.value = '';
 	}else{
 		//dialog de erro
 		$('#modalRegistrarDespesas').modal('show');
@@ -297,4 +301,21 @@ function carregarListaDespesas(){
 	})
 	//Debug
 	//console.log(despesas);
+}
+function pesquisarDespesas(){
+	let ano = document.getElementById('ano');
+	let mes = document.getElementById('mes');
+	let dia = document.getElementById('dia');
+	let tipo = document.getElementById('tipo');
+	let descricao = document.getElementById('descricao');
+	let valor = document.getElementById('valor');
+
+
+	let despesa = new Despesas(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
+
+	//objeto passado como parâmetro para a função pesquisar
+	db.pesquisar(despesa);
+	
+	//Debug
+	//console.log(despesa);
 }
