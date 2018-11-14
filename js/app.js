@@ -88,13 +88,12 @@ class Despesas{
 					clearInterval(x);
 				}
 			},2000)
-		}	
+		}
 		for(let i in this){
 			if(this[i] == undefined || this[i] == '' || this[i] == null){
 				return false;
 			}
 	 	}
-
 		return true;
 	}
 }
@@ -173,8 +172,8 @@ class Db{
 
 			//Debug
 			//console.log(despesas);
-			return despesas;
 		}
+		return despesas;
 	}
 }
 let db = new Db();
@@ -199,15 +198,22 @@ function cadastrarDespesas(){
 	let despesa = new Despesas(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
 
 	if(despesa.validarDados()){
-		//Debug
-		//console.log(despesa);
-		db.gravar(despesa);
-		$('#modalRegistrarDespesas').modal('show');
+	
+		//db.gravar(despesa);
 		document.getElementById('titleModal').className = 'text-success';
 		document.getElementById('titleModal').innerHTML = 'Registro inserido com sucesso!';
 		document.getElementById('paragrafoSucesso').innerHTML = 'Despesas cadastrado com sucesso!';
 		document.getElementById('botaoModal').className = 'btn btn-success';
 		document.getElementById('botaoModal').innerHTML = 'Voltar';
+		$('#modalRegistrarDespesas').modal('show');
+
+		//Limpar dados do formulário
+		ano.value = '';
+		mes.value = '';
+		dia.value = '';
+		tipo.value = '';
+		descricao.value = '';
+		valor.valeu = '';
 	}else{
 		//dialog de erro
 		$('#modalRegistrarDespesas').modal('show');
@@ -217,6 +223,8 @@ function cadastrarDespesas(){
 		document.getElementById('botaoModal').className = 'btn btn-danger';
 		document.getElementById('botaoModal').innerHTML = 'Voltar e Verificar';
 	}
+	//Debug
+	//console.log(despesa);
 }
 function extrairString(){
 	let char = document.getElementById('dia').value;
@@ -250,8 +258,43 @@ function changeFocus(){
 */
 function carregarListaDespesas(){
 	let despesas = new Array();
+	
 	despesas = db.recuperarTodosRegistros();
 
+	// Variável para referência de lista despesas na tabela - selecionando elemento tbody da tabela
+	let listaDespesas = document.getElementById('listaDespesas');
+
+	/* percorrer cada despesas do array de forma dinâmica, usando uma propriedade foreach com um função de callbak
+	*  necessária para o uso do foreach.
+	*/
+	despesas.forEach(function(d){
+
+		//criando a linha (tr)
+		let linha = listaDespesas.insertRow();
+
+		//criando a celula de dados da tabela (td)
+		linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
+
+		//Ajustar o tipo
+		switch(d.tipo){
+			case '1': d.tipo = 'Alimentação';
+				break;
+			case '2': d.tipo = 'Educação';
+				break;
+			case '3': d.tipo = 'Laser';
+				break;
+			case '4': d.tipo = 'Saúde';
+				break;
+			case '5': d.tipo = 'Transporte';
+				break;
+		}
+		linha.insertCell(1).innerHTML = d.tipo;
+		linha.insertCell(2).innerHTML = d.descricao;
+		linha.insertCell(3).innerHTML = d.valor;
+
+		//Debug
+		//console.log(d);
+	})
 	//Debug
-	console.log(despesas);
+	//console.log(despesas);
 }
