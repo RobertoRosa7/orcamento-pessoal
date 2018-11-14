@@ -134,6 +134,48 @@ class Db{
 		//Atualizando o valor do id
 		localStorage.setItem('id', id);
 	}
+	/*
+	* Criar um laço de repetição para recuperar os id's que estão no local storage, sabendo que existe um proximo
+	* id que será referência para tomada de decisão.
+	*/
+	recuperarTodosRegistros(){
+		/*
+		* Criar um array de despesas para conter os dados convertido pelo JASON do Local Storage
+		*/
+		let despesas = new Array();
+
+		//Armazenar o valor do id em uma variável
+		let id = localStorage.getItem('id');
+
+		/*
+		* Recuperar todas as despesas
+		* laço para percorrer toda a lista dos id's, iniciando a parte de 1 e se i for menor ou igual ao id então
+		* acrescente mais um em i 
+		*/
+		for(let i = 1; i <= id; i++){
+
+			/* 
+			* Recuperando as despesas
+			* Use JASON.parse() para transformar os dados string em objetos literais antes de seram armazenadas
+			* na variável
+			*/
+			let despesa = JSON.parse(localStorage.getItem(i));
+
+			/*
+			* Verificar se existe a possibilidade de haver índices removídos ou null, vamos pular esses índices
+			* Usando o operador continue, desconsidera tudo que for depois dele e volta para o início do laço
+			*/
+			if(despesa === null){
+				continue
+			}
+			
+			despesas.push(despesa);
+
+			//Debug
+			//console.log(despesas);
+			return despesas;
+		}
+	}
 }
 let db = new Db();
 function cadastrarDespesas(){
@@ -204,7 +246,12 @@ function changeFocus(){
 /*
 * Carregar a lista sempre que a página consulta for aberta ou atualizada, portanto, essa função deve ficar na
 * página de consulta.
+* Aqui é chamado o método para recuperar os registros dentro do web storage, este método ficar na classe Db
 */
-function carregaListaDespesas(){
+function carregarListaDespesas(){
+	let despesas = new Array();
+	despesas = db.recuperarTodosRegistros();
 
+	//Debug
+	console.log(despesas);
 }
