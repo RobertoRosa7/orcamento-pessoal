@@ -201,3 +201,10 @@ function changeBlur(){
 function changeFocus(){
 
 }
+/*
+* Carregar a lista sempre que a página consulta for aberta ou atualizada, portanto, essa função deve ficar na
+* página de consulta.
+*/
+function carregaListaDespesas(){
+
+}
