@@ -300,14 +300,19 @@ function changeFocus(){
 * página de consulta.
 * Aqui é chamado o método para recuperar os registros dentro do web storage, este método ficar na classe Db
 */
-function carregarListaDespesas(){
-	let despesas = new Array();
-	
+function carregarListaDespesas(despesas = new Array(),filter = false){
+
+	//verifica se há despesas e se o valor do filtro é igual a false, assim o retorno é vazio
+	if(despesas.length == 0 && filter == false){
 	despesas = db.recuperarTodosRegistros();
+
+	}	
 
 	// Variável para referência de lista despesas na tabela - selecionando elemento tbody da tabela
 	let listaDespesas = document.getElementById('listaDespesas');
 
+	//Limpar dados da tabela
+	listaDespesas.innerHTML = '';
 	/* percorrer cada despesas do array de forma dinâmica, usando uma propriedade foreach com um função de callbak
 	*  necessária para o uso do foreach.
 	*/
@@ -356,40 +361,7 @@ function pesquisarDespesas(){
 	//objeto passado como parâmetro para a função pesquisar, encapsular em variável para ter um retorno
 	let despesas = db.pesquisar(despesa);
 
-	// Variável para referência de lista despesas na tabela - selecionando elemento tbody da tabela
-	let listaDespesas = document.getElementById('listaDespesas');
-
-	/* percorrer cada despesas do array de forma dinâmica, usando uma propriedade foreach com um função de callbak
-	*  necessária para o uso do foreach.
-	*/
-	despesas.forEach(function(d){
-
-		//criando a linha (tr)
-		let linha = listaDespesas.insertRow();
-
-		//criando a celula de dados da tabela (td)
-		linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
-
-		//Ajustar o tipo
-		switch(d.tipo){
-			case '1': d.tipo = 'Alimentação';
-				break;
-			case '2': d.tipo = 'Educação';
-				break;
-			case '3': d.tipo = 'Laser';
-				break;
-			case '4': d.tipo = 'Saúde';
-				break;
-			case '5': d.tipo = 'Transporte';
-				break;
-		}
-		linha.insertCell(1).innerHTML = d.tipo;
-		linha.insertCell(2).innerHTML = d.descricao;
-		linha.insertCell(3).innerHTML = d.valor;
-
-		//Debug
-		//console.log(d);
-	})
+	this.carregarListaDespesas(despesas, true);
 	//Debug
 	//console.log(despesas);
 }
