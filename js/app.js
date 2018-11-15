@@ -167,7 +167,14 @@ class Db{
 			if(despesa === null){
 				continue
 			}
-			
+			/* 
+			* adicionando id - para identificação dos objetos e fazer sua respectiva exclusão
+			* esta inserção de um novo atributo é feita aqui, porque através desta função que recupera todos os
+			* registro e faz a conversão de JSON para Objeto Literal, portanto, se hover índice null será pulado
+			* com a instrução acima
+			*/
+			despesa.id = i;
+
 			despesas.push(despesa);
 
 			//Debug
@@ -219,6 +226,9 @@ class Db{
 		//console.log(despesasFiltradas);
 		return despesasFiltradas;
 	}
+	remover(id){
+		localStorage.removeItem(id);
+	}
 }
 let db = new Db();
 function cadastrarDespesas(){
@@ -240,10 +250,11 @@ function cadastrarDespesas(){
 
 	//Instanciação o Objeto com os parâmetro
 	let despesa = new Despesas(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
-
+	
 	if(despesa.validarDados()){
 	
 		db.gravar(despesa);
+		//Modal
 		document.getElementById('titleModal').className = 'text-success';
 		document.getElementById('titleModal').innerHTML = 'Registro inserido com sucesso!';
 		document.getElementById('paragrafoSucesso').innerHTML = 'Despesas cadastrado com sucesso!';
@@ -268,7 +279,7 @@ function cadastrarDespesas(){
 		document.getElementById('botaoModal').innerHTML = 'Voltar e Verificar';
 	}
 	//Debug
-	//console.log(despesa);
+	//console.log();
 }
 function extrairString(){
 	let char = document.getElementById('dia').value;
@@ -315,6 +326,7 @@ function carregarListaDespesas(despesas = new Array(),filter = false){
 	listaDespesas.innerHTML = '';
 	/* percorrer cada despesas do array de forma dinâmica, usando uma propriedade foreach com um função de callbak
 	*  necessária para o uso do foreach.
+	* (d) representa os índices percorrido pelo foreach no objeto despesas, retornando seus valores.
 	*/
 	despesas.forEach(function(d){
 
@@ -340,6 +352,32 @@ function carregarListaDespesas(despesas = new Array(),filter = false){
 		linha.insertCell(1).innerHTML = d.tipo;
 		linha.insertCell(2).innerHTML = d.descricao;
 		linha.insertCell(3).innerHTML = d.valor;
+
+		//criar o botão de exclusão
+		let btn = document.createElement('button');
+		//adicinando classe ao butão
+		btn.className = 'btn btn-danger';
+		//adicionando tag de icone
+		btn.innerHTML = '<i class="fas fa-times"></i>';
+		//associando id ao botão de exclusão e concatenação para não ocorrer erros
+		btn.id = `id_despesas_${d.id}`;
+		//adicionando a função remover
+		btn.onclick = function(){ //remover item de despesa
+
+			//remover a string id_despesas do id porque é apenas um referência porque o próprio id não possui
+			let id = this.id.replace('id_despesas_','');
+
+			//removendo despesas
+			db.remover(id);
+
+			//recarregando a página para atualizar os dados
+			window.location.reload();
+
+			//Debug
+			//alert(id);
+		}
+		//adicionando butão dentro da tag (td)
+		linha.insertCell(4).append(btn);
 
 		//Debug
 		//console.log(d);
