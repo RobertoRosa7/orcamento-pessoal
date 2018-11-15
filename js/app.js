@@ -216,7 +216,8 @@ class Db{
 		}
 		
 		//Debug
-		console.log(despesasFiltradas);
+		//console.log(despesasFiltradas);
+		return despesasFiltradas;
 	}
 }
 let db = new Db();
@@ -352,9 +353,43 @@ function pesquisarDespesas(){
 
 	let despesa = new Despesas(ano.value,mes.value,dia.value,tipo.value,descricao.value,valor.value);
 
-	//objeto passado como parâmetro para a função pesquisar
-	db.pesquisar(despesa);
+	//objeto passado como parâmetro para a função pesquisar, encapsular em variável para ter um retorno
+	let despesas = db.pesquisar(despesa);
 
+	// Variável para referência de lista despesas na tabela - selecionando elemento tbody da tabela
+	let listaDespesas = document.getElementById('listaDespesas');
+
+	/* percorrer cada despesas do array de forma dinâmica, usando uma propriedade foreach com um função de callbak
+	*  necessária para o uso do foreach.
+	*/
+	despesas.forEach(function(d){
+
+		//criando a linha (tr)
+		let linha = listaDespesas.insertRow();
+
+		//criando a celula de dados da tabela (td)
+		linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`;
+
+		//Ajustar o tipo
+		switch(d.tipo){
+			case '1': d.tipo = 'Alimentação';
+				break;
+			case '2': d.tipo = 'Educação';
+				break;
+			case '3': d.tipo = 'Laser';
+				break;
+			case '4': d.tipo = 'Saúde';
+				break;
+			case '5': d.tipo = 'Transporte';
+				break;
+		}
+		linha.insertCell(1).innerHTML = d.tipo;
+		linha.insertCell(2).innerHTML = d.descricao;
+		linha.insertCell(3).innerHTML = d.valor;
+
+		//Debug
+		//console.log(d);
+	})
 	//Debug
-	//console.log(despesa);
+	//console.log(despesas);
 }
